@@ -78,7 +78,3 @@ public class ContactManager {
     private static void viewAllContacts(ArrayList<String> contactList) {
     }
 }
-
-
-
-
