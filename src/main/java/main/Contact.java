@@ -26,6 +26,23 @@ public class Contact {
         this.contactNumber = contactNumber;
     }
 
+
+    public String toFileString() {
+        return String.format("%s,%s", contactName, contactNumber);
+    }
+
+    public static Contact fromFileString(String fileString) {
+        // file format is name,health,strength
+        String [] pieces = fileString.split(",");
+        Contact fighter = new Contact(Integer.parseInt(pieces[0]));
+        contact.setcontactNumber(Integer.parseInt(pieces[1]));
+        return fighter;
+    }
+
+
+
+
+
     @Override
     public String toString() {
         return " Name='" + contactName + '\'' +
