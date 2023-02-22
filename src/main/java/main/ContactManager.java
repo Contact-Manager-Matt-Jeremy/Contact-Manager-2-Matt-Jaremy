@@ -25,7 +25,8 @@ public class ContactManager {
     public static ArrayList<Contact> loadContacts() {
         ArrayList<Contact> contacts = new ArrayList<>();
         try {
-            File file = new File("Contacts.txt");
+            Path path =  Paths.get("Contacts.txt");
+            File file  = path.toFile();
             if (file.exists()) {
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
@@ -42,10 +43,6 @@ public class ContactManager {
     }
 
 
-
-
-
-
     public static Contact addContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter name: ");
@@ -57,13 +54,10 @@ public class ContactManager {
     }
 
 
-
-
-
-    public static void getCategoryName(int userMenueChoice, ArrayList<Contact> contacts) {
+    public static void getCategoryName(int userMenueChoice) {
         switch (userMenueChoice) {
             case 1:
-                loadContacts();
+                System.out.println(loadContacts());
                 break;
             case 2:
                 addContact();
@@ -86,13 +80,13 @@ public class ContactManager {
 
 
     public static void main(String[] args) {
-        Path contactList = Paths.get("Contacts.txt");
-
-
        ArrayList<Contact> contacts = loadContacts();
+        System.out.println(contacts);
 
         int userMenueChoice = showMainMenu();
-        getCategoryName(userMenueChoice, contacts);
+        getCategoryName(userMenueChoice);
+
+
 
 
     }
