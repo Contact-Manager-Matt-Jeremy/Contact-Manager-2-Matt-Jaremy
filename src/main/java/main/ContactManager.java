@@ -27,30 +27,23 @@ public class ContactManager {
         return Contact.add(new Contact(name, phoneNumber));
     }
 
+    public static void getCategoryName(int userMenueChoice) {
+        switch (userMenueChoice) {
+            case 1:
+                System.out.println("not done yet");;
+            case 2:
+                addContact();
+            default:
+                System.out.println("That wasnt a proper input");;
+        }
+    }
+
 
     public static void main(String[] args) {
 
-        int UserMenueChoice = showMainMenu();
+        int userMenueChoice = showMainMenu();
+        getCategoryName(userMenueChoice);
 
-
-        private static String getCategoryName(int userMenueChoice) {
-            switch (userMenueChoice) {
-                case 1:
-                    return "Produce";
-                case 2:
-                    return "Dairy";
-                case 3:
-                    return "Meat";
-                case 4:
-                    return "Bakery";
-                case 5:
-                    return "Canned Goods";
-                case 6:
-                    return "Frozen Foods";
-                default:
-                    return "Unknown";
-            }
-        }
 
     }
 }
