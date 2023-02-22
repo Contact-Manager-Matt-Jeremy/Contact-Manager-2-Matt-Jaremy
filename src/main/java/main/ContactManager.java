@@ -42,15 +42,15 @@ public class ContactManager {
         return contacts;
     }
 
-
-    public static Contact addContact() {
+    public static void addContact(ArrayList<Contact> contacts) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
         System.out.print("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
         System.out.println("Contact added.");
-        return Contact.add(new Contact(name, phoneNumber));
+        Contact aNewContact =  Contact.add(new Contact(name, phoneNumber));
+        contacts.add(aNewContact);
     }
 
 
@@ -60,7 +60,7 @@ public class ContactManager {
                 System.out.println(loadContacts());
                 break;
             case 2:
-                addContact();
+//                addContact();
                 break;
             default:
                 System.out.println("That wasn't a proper input");
@@ -80,7 +80,9 @@ public class ContactManager {
 
 
     public static void main(String[] args) {
-       ArrayList<Contact> contacts = loadContacts();
+        ArrayList<Contact> contacts = loadContacts();
+        System.out.println(contacts);
+        addContact(contacts);
         System.out.println(contacts);
 
         int userMenueChoice = showMainMenu();

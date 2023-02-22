@@ -1,8 +1,9 @@
+
 package main;
 
 public class Contact {
-    static String contactName;
-    static String contactNumber;
+    String contactName;
+    String contactNumber;
 
     public Contact(String contactName, String contactNumber) {
         this.contactName = contactName;
