@@ -1,13 +1,14 @@
 package main;
 
 public class Contact {
-    String contactName;
-    String contactNumber;
+    static String contactName;
+    static String contactNumber;
 
     public Contact(String contactName, String contactNumber) {
         this.contactName = contactName;
         this.contactNumber = contactNumber;
     }
+
 
     public static Contact add(Contact contact) {
         return contact;
