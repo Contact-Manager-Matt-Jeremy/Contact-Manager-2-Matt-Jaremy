@@ -16,7 +16,7 @@ public class ContactManager {
         return menueChoice;
     }
 
-
+//
     public static Contact addContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter name: ");
