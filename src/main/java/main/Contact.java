@@ -28,6 +28,15 @@ public class Contact {
         this.contactNumber = contactNumber;
     }
 
+
+    public String toFileString() {
+        return String.format("%s,%s", contactName, contactNumber);
+    }
+
+
+
+
+
     @Override
     public String toString() {
         return " Name='" + contactName + '\'' +
