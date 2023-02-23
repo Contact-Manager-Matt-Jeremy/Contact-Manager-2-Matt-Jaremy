@@ -36,6 +36,7 @@ public class ContactManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return contacts;
     }
 
@@ -48,8 +49,11 @@ public class ContactManager {
         System.out.println("Contact added.");
         Contact aNewContact = Contact.add(new Contact(name, phoneNumber));
         contacts.add(aNewContact);
-        System.out.println(contacts);
+        printContacts(contacts);
     }
+
+
+
 
     public static void searchContact(ArrayList<Contact> contacts) {
         Scanner scanner = new Scanner(System.in);
@@ -66,7 +70,6 @@ public class ContactManager {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the contact name to delete: ");
         String name = scanner.nextLine();
-        System.out.println(contacts);
 
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).contactName.contains(name)) {
@@ -74,7 +77,7 @@ public class ContactManager {
                 contacts.remove(contacts.get(i));
             }
         }
-        System.out.println(contacts);
+        printContacts(contacts);
     }
 
     public static void saveContacts(ArrayList<Contact> contacts) {
@@ -89,7 +92,15 @@ public class ContactManager {
         }
     }
 
-
+    public static void printContacts(ArrayList<Contact> contacts) {
+        System.out.printf("---------------------------------\n");
+        System.out.printf("| %-15s| %-13s|\n", "Name", "Number");
+        System.out.printf("---------------------------------\n");
+        for (int i = 0; i < contacts.size(); i++) {
+            System.out.printf("| %-15s| %-13s|\n", contacts.get(i).contactName, contacts.get(i).contactNumber);
+        }
+        System.out.printf("---------------------------------\n");
+    }
 
 
 
@@ -108,7 +119,7 @@ public class ContactManager {
             switch (choice) {
                 case "1":
                     System.out.println(" ");
-                    System.out.println(loadContacts());
+                    printContacts(contacts);
                     System.out.println(" ");
                     break;
                 case "2":
