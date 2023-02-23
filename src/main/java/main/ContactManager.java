@@ -1,6 +1,7 @@
 package main;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +18,6 @@ public class ContactManager {
         System.out.println("5. Exit.");
         System.out.print("Enter an option (1, 2, 3, 4 or 5): ");
     }
-
 
     public static ArrayList<Contact> loadContacts() {
         ArrayList<Contact> contacts = new ArrayList<>();
@@ -62,7 +62,6 @@ public class ContactManager {
         }
     }
 
-
     public static void deleteContact(ArrayList<Contact> contacts) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the contact name to delete: ");
@@ -78,33 +77,17 @@ public class ContactManager {
         System.out.println(contacts);
     }
 
-
-
-//    public static void getCategoryName(int userMenueChoice, ArrayList<Contact> contacts) {
-//        switch (userMenueChoice) {
-//            case 1:
-//                System.out.println(loadContacts());
-//                break;
-//            case 2:
-//               addContact(contacts);
-//                break;
-//            case 3:
-//                searchContact(contacts);
-//                break;
-//            case 4:
-//                System.out.println("this is not ready yet");;
-//                break;
-//            case 5:
-//                System.out.println("Goodbye...");
-//                break;
-//            default:
-//                System.out.println("That wasn't a proper input");
-//                break;
-//        }
-//    }
-
-
-
+    public static void saveContacts(ArrayList<Contact> contacts) {
+        try {
+            FileWriter writer = new FileWriter("Contacts.txt");
+            for (Contact contact : contacts) {
+                writer.write(contact.contactName + "," + contact.contactNumber + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -131,6 +114,7 @@ public class ContactManager {
                 case "2":
                     System.out.println(" ");
                     addContact(contacts);
+                    saveContacts(contacts);
                     System.out.println(" ");
                     break;
                 case "3":
@@ -141,6 +125,7 @@ public class ContactManager {
                 case "4":
                     System.out.println(" ");
                     deleteContact(contacts);
+                    saveContacts(contacts);
                     System.out.println(" ");
                     break;
                 case "5":
@@ -154,6 +139,6 @@ public class ContactManager {
                     System.out.println(" ");
             }
         } while (!choice.equals("5"));
-//        saveContacts(contacts);
+           saveContacts(contacts);
     }
 }
