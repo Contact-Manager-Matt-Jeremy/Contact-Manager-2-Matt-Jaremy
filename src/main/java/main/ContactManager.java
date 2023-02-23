@@ -9,16 +9,13 @@ import java.util.Scanner;
 
 public class ContactManager {
 
-    public static int showMainMenu() {
-        Scanner input = new Scanner(System.in);
+    public static void showMainMenu() {
         System.out.println("1. View contacts.");
         System.out.println("2. Add a new contact.");
         System.out.println("3. Search a contact by name.");
         System.out.println("4. Delete an existing contact.");
         System.out.println("5. Exit.");
         System.out.print("Enter an option (1, 2, 3, 4 or 5): ");
-        int menueChoice = input.nextInt();
-        return menueChoice;
     }
 
 
@@ -49,48 +46,62 @@ public class ContactManager {
         System.out.print("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
         System.out.println("Contact added.");
-        Contact aNewContact =  Contact.add(new Contact(name, phoneNumber));
+        Contact aNewContact = Contact.add(new Contact(name, phoneNumber));
         contacts.add(aNewContact);
+        System.out.println(contacts);
     }
 
     public static void searchContact(ArrayList<Contact> contacts) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the contact name: ");
         String name = scanner.nextLine();
-        scanner.close();
         for (Contact contact : contacts) {
             if (contact.contactName.contains(name)) {
                 System.out.println(contact.contactName + " | " + contact.contactNumber);
-            } else {
-                System.out.println("No contacts found by that name");
             }
         }
     }
 
 
+    public static void deleteContact(ArrayList<Contact> contacts) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the contact name to delete: ");
+        String name = scanner.nextLine();
+        System.out.println(contacts);
 
-    public static void getCategoryName(int userMenueChoice, ArrayList<Contact> contacts) {
-        switch (userMenueChoice) {
-            case 1:
-                System.out.println(loadContacts());
-                break;
-            case 2:
-               addContact(contacts);
-                break;
-            case 3:
-                searchContact(contacts);
-                break;
-            case 4:
-                System.out.println("this is not ready yet");;
-                break;
-            case 5:
-                System.out.println("Goodbye...");
-                break;
-            default:
-                System.out.println("That wasn't a proper input");
-                break;
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).contactName.contains(name)) {
+                System.out.println("deleting: " + contacts.get(i).contactName);
+                contacts.remove(contacts.get(i));
+            }
         }
+        System.out.println(contacts);
     }
+
+
+
+//    public static void getCategoryName(int userMenueChoice, ArrayList<Contact> contacts) {
+//        switch (userMenueChoice) {
+//            case 1:
+//                System.out.println(loadContacts());
+//                break;
+//            case 2:
+//               addContact(contacts);
+//                break;
+//            case 3:
+//                searchContact(contacts);
+//                break;
+//            case 4:
+//                System.out.println("this is not ready yet");;
+//                break;
+//            case 5:
+//                System.out.println("Goodbye...");
+//                break;
+//            default:
+//                System.out.println("That wasn't a proper input");
+//                break;
+//        }
+//    }
 
 
 
@@ -105,13 +116,44 @@ public class ContactManager {
 
     public static void main(String[] args) {
         ArrayList<Contact> contacts = loadContacts();
-
-
-            int userMenueChoice = showMainMenu();
-            getCategoryName(userMenueChoice, contacts);
-
-
-
-
+        Scanner scanner = new Scanner(System.in);
+        String choice;
+        do {
+            showMainMenu();
+            choice = scanner.nextLine();
+            System.out.println(choice);
+            switch (choice) {
+                case "1":
+                    System.out.println(" ");
+                    System.out.println(loadContacts());
+                    System.out.println(" ");
+                    break;
+                case "2":
+                    System.out.println(" ");
+                    addContact(contacts);
+                    System.out.println(" ");
+                    break;
+                case "3":
+                    System.out.println(" ");
+                    searchContact(contacts);
+                    System.out.println(" ");
+                    break;
+                case "4":
+                    System.out.println(" ");
+                    deleteContact(contacts);
+                    System.out.println(" ");
+                    break;
+                case "5":
+                    System.out.println(" ");
+                    System.out.println("Goodbye...");
+                    System.out.println(" ");
+                    break;
+                default:
+                    System.out.println(" ");
+                    System.out.println("Invalid choice, please try again.");
+                    System.out.println(" ");
+            }
+        } while (!choice.equals("5"));
+//        saveContacts(contacts);
     }
 }
