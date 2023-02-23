@@ -72,7 +72,17 @@ public class ContactManager {
         String name = scanner.nextLine();
         for (Contact contact : contacts) {
             if (contact.contactName.contains(capitalizeWords(name))) {
-                System.out.println(contact.contactName + " | " + contact.contactNumber);
+                System.out.printf("""
+                    
+                    ---------------------------------
+                    | SEARCH RESULTS                |
+                    ---------------------------------
+                    """);
+                System.out.printf("| %-15s| %-13s|\n", "Name", "Number");
+                System.out.printf("---------------------------------\n");
+                System.out.printf("| %-15s| %-13s|\n", contact.contactName, contact.contactNumber);
+                System.out.printf("---------------------------------\n");
+
             }
         }
     }
@@ -84,8 +94,12 @@ public class ContactManager {
 
         for (int i = contacts.size() -1; i >= 0; i--) {
             if (contacts.get(i).contactName.contains(capitalizeWords(name))) {
-                System.out.println("deleting: " + contacts.get(i).contactName);
-                contacts.remove(contacts.get(i));
+                System.out.println("Would you like to delete " + contacts.get(i).contactName + "(yes/no) :");
+                String deleteChoice = scanner.nextLine();
+                if (deleteChoice.equalsIgnoreCase("yes")){
+                    System.out.println("Deleting: " + contacts.get(i).contactName);
+                    contacts.remove(contacts.get(i));
+                }
             }
         }
         printContacts(contacts);
