@@ -53,14 +53,38 @@ public class ContactManager {
         contacts.add(aNewContact);
     }
 
+    public static void searchContact(ArrayList<Contact> contacts) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the contact name: ");
+        String name = scanner.nextLine();
+        scanner.close();
+        for (Contact contact : contacts) {
+            if (contact.contactName.contains(name)) {
+                System.out.println(contact.contactName + " | " + contact.contactNumber);
+            } else {
+                System.out.println("No contacts found by that name");
+            }
+        }
+    }
 
-    public static void getCategoryName(int userMenueChoice) {
+
+
+    public static void getCategoryName(int userMenueChoice, ArrayList<Contact> contacts) {
         switch (userMenueChoice) {
             case 1:
                 System.out.println(loadContacts());
                 break;
             case 2:
-//                addContact();
+               addContact(contacts);
+                break;
+            case 3:
+                searchContact(contacts);
+                break;
+            case 4:
+                System.out.println("this is not ready yet");;
+                break;
+            case 5:
+                System.out.println("Goodbye...");
                 break;
             default:
                 System.out.println("That wasn't a proper input");
@@ -81,12 +105,10 @@ public class ContactManager {
 
     public static void main(String[] args) {
         ArrayList<Contact> contacts = loadContacts();
-        System.out.println(contacts);
-        addContact(contacts);
-        System.out.println(contacts);
 
-        int userMenueChoice = showMainMenu();
-        getCategoryName(userMenueChoice);
+
+            int userMenueChoice = showMainMenu();
+            getCategoryName(userMenueChoice, contacts);
 
 
 
